@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parv Gupta - Resume</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Colors */
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --primary-blue: #3b82f6;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+            --bg-light: #f8fafc;
+            --white: #ffffff;
+            --success: #10b981;
+            --border-color: #e2e8f0;
+            
+            /* Spacing */
+            --spacing-xs: 0.5rem;
+            --spacing-sm: 1rem;
+            --spacing-md: 1.5rem;
+            --spacing-lg: 2rem;
+            --spacing-xl: 3rem;
+            
+            /* Shadows */
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            
+            /* Transitions */
+            --transition-fast: 0.2s ease;
+            --transition-normal: 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: var(--bg-light);
+            scroll-behavior: smooth;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: var(--spacing-sm) 0;
+            box-shadow: var(--shadow-sm);
+            transition: all var(--transition-normal);
+        }
+
+        .navbar.scrolled {
+            box-shadow: var(--shadow-md);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 var(--spacing-lg);
+        }
+
+        .logo {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: var(--spacing-lg);
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            position: relative;
+            transition: color var(--transition-fast);
+        }
+
+        .nav-link:hover {
+            color: var(--primary-blue);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-gradient);
+            transition: width var(--transition-fast);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: var(--primary-gradient);
+            color: white;
+            padding: var(--spacing-xl) var(--spacing-lg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1.5" fill="rgba(255,255,255,0.05)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            margin-bottom: var(--spacing-lg);
+            opacity: 0.95;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: var(--spacing-sm) var(--spacing-lg);
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all var(--transition-normal);
+            border: 2px solid transparent;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: var(--white);
+            color: #667eea;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Sections */
+        .section {
+            padding: var(--spacing-xl) 0;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-left: var(--spacing-lg);
+            padding-right: var(--spacing-lg);
+        }
+
+        .section-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: clamp(2rem, 4vw, 2.5rem);
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: var(--spacing-xl);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--primary-gradient);
+            border-radius: 2px;
+        }
+
+        /* About Section */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-xl);
+            align-items: center;
+        }
+
+        .about-text h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: var(--spacing-md);
+            color: var(--primary-blue);
+        }
+
+        .contact-info {
+            background: var(--white);
+            padding: var(--spacing-lg);
+            border-radius: 12px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-color);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            margin-bottom: var(--spacing-sm);
+            font-weight: 500;
+        }
+
+        /* Skills Grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--spacing-lg);
+        }
+
+        .skill-card {
+            background: var(--white);
+            padding: var(--spacing-lg);
+            border-radius: 12px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-color);
+            transition: all var(--transition-normal);
+            text-align: center;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary-blue);
+        }
+
+        .skill-icon {
+            font-size: 3rem;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: var(--spacing-md);
+        }
+
+        /* Experience Timeline */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--primary-gradient);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: var(--spacing-xl);
+            padding-left: 60px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 16px;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            background: var(--white);
+            border: 3px solid var(--primary-blue);
+            border-radius: 50%;
+            z-index: 1;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+        }
+
+        .timeline-card {
+            background: var(--white);
+            padding: var(--spacing-lg);
+            border-radius: 12px;
+            box-shadow: var(--shadow-md);
+            border-left: 4px solid var(--primary-blue);
+            transition: all var(--transition-normal);
+        }
+
+        .timeline-card:hover {
+            transform: translateX(5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .timeline-date {
+            color: var(--success);
+            font-weight: 600;
+            margin-bottom: var(--spacing-xs);
+        }
+
+        /* Achievements Grid */
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-lg);
+        }
+
+        .achievement-card {
+            background: var(--white);
+            padding: var(--spacing-lg);
+            border-radius: 12px;
+            box-shadow: var(--shadow-md);
+            border-top: 4px solid var(--success);
+            transition: all var(--transition-normal);
+        }
+
+        .achievement-card:hover {
+            transform: scale(1.02);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--text-dark);
+            color: white;
+            text-align: center;
+            padding: var(--spacing-lg) 0;
+            margin-top: var(--spacing-xl);
+        }
+
+        /* Scroll to Top */
+        #scrollToTop {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all var(--transition-normal);
+            z-index: 1000;
+        }
+
+        #scrollToTop.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: var(--spacing-md);
+            }
+            
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: var(--spacing-lg);
+            }
+            
+            .nav-container {
+                padding: 0 var(--spacing-md);
+            }
+            
+            .section {
+                padding-left: var(--spacing-md);
+                padding-right: var(--spacing-md);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .nav-links {
+                flex-direction: column;
+                gap: var(--spacing-sm);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="logo">Parv Gupta</div>
+            <ul class="nav-links">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#education" class="nav-link">Education</a></li>
+                <li><a href="#experience" class="nav-link">Experience</a></li>
+                <li><a href="#skills" class="nav-link">Skills</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Parv Gupta</h1>
+            <p class="hero-subtitle">Secondary School Graduate | Leadership Excellence | AI/ML Enthusiast</p>
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                <a href="#about" class="btn btn-primary">View Profile</a>
+                <a href="#contact" class="btn" style="background: transparent; color: white; border-color: white;">Contact Me</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <h2 class="section-title">About Me</h2>
+        <div class="about-grid">
+            <div class="about-text">
+                <h3>Highly Motivated Leader</h3>
+                <p>Academically accomplished Class 12 graduate with consistent excellence (90% Class 10, 86.6% Class 12 PCMCS). Proven leadership through Prefect (2018-2023), Core Council Member (2023-24), and organizing major school events like Music Bonanza.</p>
+                <p>Passionate about management education, AI/ML applications in finance, and creating social impact through initiatives like Book Donation Drives for underprivileged communities.</p>
+            </div>
+            <div class="contact-info">
+                <h4 style="margin-bottom: var(--spacing-md);">Contact Information</h4>
+                <div class="contact-item">📍 Delhi, India</div>
+                <div class="contact-item">📞 +91 7011520009</div>
+                <div class="contact-item">✉️ parvgupta0407@gmail.com</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="section">
+        <h2 class="section-title">Education</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-card">
+                    <div class="timeline-date">Class 12th - CBSE PCMCS 2025</div>
+                    <h3>Summer Fields School, Delhi</h3>
+                    <p><strong>Percentage: 86.6%</strong></p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-card">
+                    <div class="timeline-date">Class 10th - CBSE 2023</div>
+                    <h3>Summer Fields School, Delhi</h3>
+                    <p><strong>Percentage: 90%</strong></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience/Achievements Section -->
+    <section id="experience" class="section">
+        <h2 class="section-title">Leadership & Achievements</h2>
+        <div class="achievements-grid">
+            <div class="achievement-card">
+                <h4>Scholar Badge Holder</h4>
+                <p>Seven consecutive years (2017-18 to 2023-24) for academic excellence</p>
+            </div>
+            <div class="achievement-card">
+                <h4>Prefect & Core Council</h4>
+                <p>2018-2023: Prefect | 2023-24: Core Council Member at Summer Fields School</p>
+            </div>
+            <div class="achievement-card">
+                <h4>1st Position - Compfest 2024</h4>
+                <p>Inter-school Extravaganza by Frank Anthony Public School (tech competition)</p>
+            </div>
+            <div class="achievement-card">
+                <h4>Music Bonanza Lead</h4>
+                <p>Organized major cultural event, managed logistics and stage coordination</p>
+            </div>
+            <div class="achievement-card">
+                <h4>Youth Eco-champion</h4>
+                <p>Selected for Youth Eco Summit 2024 by BAJAJ Foundation</p>
+            </div>
+            <div class="achievement-card">
+                <h4>Book Donation Drive</h4>
+                <p>Organized for Hope Hall Foundation, mobilized student participation</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section">
+        <h2 class="section-title">Skills & Interests</h2>
+        <div class="skills-grid">
+            <div class="skill-card">
+                <div class="skill-icon">🤖</div>
+                <h4>AI/ML in Finance</h4>
+                <p>Studying neural networks, stock prediction, risk modeling, fraud detection</p>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon">🐍</div>
+                <h4>Python & SQL</h4>
+                <p>Programming fundamentals and database management</p>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon">💼</div>
+                <h4>Leadership</h4>
+                <p>Team management, event organization, delegation</p>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon">🧠</div>
+                <h4>Critical Thinking</h4>
+                <p>Problem-solving, adaptability, strategic planning</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2026 Parv Gupta. Made with ❤️ using HTML & CSS.</p>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollToTop" title="Scroll to Top">↑</button>
+
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        // Smooth scroll for nav links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Scroll to top button
+        const scrollToTopBtn = document.getElementById('scrollToTop');
+        window.addEventListener('scroll', () => {
+            scrollToTopBtn.classList.toggle('show', window.scrollY > 300);
+        });
+        scrollToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
