@@ -1,208 +1,658 @@
-<section class="section" id="projects">
-  <div class="container">
-    <div class="section-head reveal">
-      <span class="eyebrow">Learning by doing</span>
-      <h2>Selected academic projects</h2>
-      <p>Projects that connect classroom concepts with practical business, financial and technology applications.</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#101d2b">
+  <meta name="description" content="Parv Gupta — BBA student exploring the intersection of business, finance, analytics and technology.">
+  <title>Parv Gupta — Business, Finance & Technology</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #172638;
+      --ink-soft: #425365;
+      --muted: #718091;
+      --paper: #f6f7f5;
+      --white: #fff;
+      --line: #e3e8e9;
+      --navy: #101d2b;
+      --navy-2: #172a3c;
+      --teal: #83c9bd;
+      --teal-dark: #287f76;
+      --pale-teal: #e8f4f1;
+      --sand: #e9e3d9;
+      --shadow: 0 18px 50px rgba(16, 29, 43, .08);
+      --radius: 20px;
+      --max: 1160px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+    body {
+      margin: 0; background: var(--paper); color: var(--ink);
+      font-family: "DM Sans", sans-serif; line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    a:focus-visible, button:focus-visible { outline: 3px solid var(--teal); outline-offset: 4px; }
+    .container { width: min(var(--max), calc(100% - 48px)); margin: 0 auto; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 10px; color: var(--teal-dark);
+      font-size: .76rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase;
+    }
+    .eyebrow::before { content: ""; width: 25px; height: 1px; background: currentColor; }
+    h1, h2, h3, h4 { font-family: "Manrope", sans-serif; line-height: 1.16; letter-spacing: -.035em; }
+    h2 { margin: 12px 0 14px; font-size: clamp(2rem, 4vw, 3rem); }
+    p { margin: 0 0 16px; color: var(--ink-soft); }
+    .section { padding: 104px 0; }
+    .section-head { max-width: 660px; margin-bottom: 42px; }
+    .section-head p { max-width: 570px; font-size: 1.04rem; }
+    .navbar {
+      position: fixed; inset: 0 0 auto; z-index: 50; height: 76px;
+      background: rgba(246,247,245,.88); border-bottom: 1px solid rgba(227,232,233,.8);
+      backdrop-filter: blur(16px); transition: box-shadow .25s ease, background .25s ease;
+    }
+    .navbar.scrolled { box-shadow: 0 8px 30px rgba(16,29,43,.07); background: rgba(246,247,245,.96); }
+    .nav-inner { height: 100%; display: flex; align-items: center; justify-content: space-between; }
+    .brand { text-decoration: none; font-family: "Manrope", sans-serif; font-weight: 800; font-size: 1.1rem; letter-spacing: -.04em; }
+    .brand span { color: var(--teal-dark); }
+    .nav-links { display: flex; align-items: center; gap: 27px; list-style: none; margin: 0; padding: 0; }
+    .nav-links a { text-decoration: none; color: var(--ink-soft); font-size: .88rem; font-weight: 600; transition: color .2s; }
+    .nav-links a:hover { color: var(--teal-dark); }
+    .nav-links .nav-cta { color: var(--white); background: var(--navy); padding: 10px 16px; border-radius: 999px; }
+    .nav-links .nav-cta:hover { background: var(--teal-dark); color: white; }
+    .menu-toggle { display: none; border: 1px solid var(--line); background: white; border-radius: 12px; width: 44px; height: 42px; color: var(--ink); font-size: 1.25rem; cursor: pointer; }
+    .hero {
+      min-height: 740px; padding: 150px 0 100px; color: white; background: var(--navy);
+      position: relative; overflow: hidden; display: flex; align-items: center;
+    }
+    .hero::before {
+      content: ""; position: absolute; width: 680px; height: 680px; border-radius: 50%;
+      right: -170px; top: 30px; border: 1px solid rgba(131,201,189,.17);
+      box-shadow: 0 0 0 70px rgba(131,201,189,.025), 0 0 0 140px rgba(131,201,189,.02);
+    }
+    .hero::after {
+      content: ""; position: absolute; width: 430px; height: 430px; border-radius: 50%;
+      right: -40px; top: 155px; background: radial-gradient(circle, rgba(131,201,189,.15), transparent 68%);
+    }
+    .hero-grid { display: grid; grid-template-columns: 1.3fr .7fr; align-items: center; gap: 60px; position: relative; z-index: 1; }
+    .hero .eyebrow { color: var(--teal); }
+    .hero h1 { margin: 22px 0 14px; font-size: clamp(3.5rem, 7.4vw, 6.5rem); font-weight: 800; letter-spacing: -.075em; }
+    .hero h1 span { color: var(--teal); }
+    .hero-title { max-width: 690px; margin: 0 0 20px; color: #e4edf0; font-family: "Manrope", sans-serif; font-size: clamp(1.35rem, 2.5vw, 2rem); line-height: 1.35; font-weight: 600; letter-spacing: -.035em; }
+    .hero-copy { max-width: 620px; color: #b8c5cf; font-size: 1.05rem; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+      min-height: 48px; padding: 0 19px; border-radius: 999px; text-decoration: none;
+      font-size: .9rem; font-weight: 700; border: 1px solid transparent; transition: .22s ease;
+    }
+    .btn-primary { background: var(--teal); color: var(--navy); }
+    .btn-primary:hover { background: #a2ddd2; transform: translateY(-2px); }
+    .btn-outline { border-color: rgba(255,255,255,.27); color: white; }
+    .btn-outline:hover { border-color: var(--teal); color: var(--teal); transform: translateY(-2px); }
+    .btn-light { background: white; color: var(--navy); border-color: var(--line); }
+    .btn-light:hover { border-color: var(--teal-dark); color: var(--teal-dark); transform: translateY(-2px); }
+    .hero-aside { justify-self: end; width: min(100%, 310px); position: relative; }
+    .orbit-card {
+      padding: 28px; border: 1px solid rgba(255,255,255,.14); border-radius: 24px;
+      background: rgba(255,255,255,.055); backdrop-filter: blur(10px);
+    }
+    .orbit-card .mini-label { color: var(--teal); font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .14em; }
+    .orbit-card h3 { color: white; font-size: 1.45rem; margin: 12px 0 22px; }
+    .focus-row { display: flex; align-items: center; gap: 12px; padding: 13px 0; border-top: 1px solid rgba(255,255,255,.12); color: #d6e0e4; font-size: .92rem; }
+    .focus-icon { display: grid; place-items: center; width: 32px; height: 32px; border-radius: 10px; color: var(--teal); background: rgba(131,201,189,.12); font-size: .95rem; }
+    .hero-note { color: #91a2ae; font-size: .78rem; margin: 18px 0 0; text-align: center; }
+    .intro-strip { background: white; border-bottom: 1px solid var(--line); }
+    .strip-inner { display: flex; align-items: center; justify-content: space-between; gap: 25px; padding: 24px 0; }
+    .strip-inner p { margin: 0; font-size: .9rem; }
+    .strip-tags { display: flex; gap: 9px; flex-wrap: wrap; }
+    .strip-tags span, .tag { border: 1px solid var(--line); background: #fbfcfb; border-radius: 999px; padding: 7px 12px; color: var(--ink-soft); font-size: .78rem; font-weight: 600; }
+    .about-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 70px; align-items: start; }
+    .about-copy { font-size: 1.08rem; }
+    .about-copy p { margin-bottom: 18px; }
+    .about-note { border-left: 3px solid var(--teal-dark); padding: 4px 0 4px 18px; margin-top: 26px; color: var(--ink); font-family: "Manrope", sans-serif; font-weight: 700; }
+    .about-panel { background: white; border: 1px solid var(--line); border-radius: var(--radius); padding: 30px; box-shadow: var(--shadow); }
+    .about-panel h3 { margin: 0 0 20px; font-size: 1.15rem; }
+    .fact { display: flex; justify-content: space-between; gap: 20px; padding: 14px 0; border-top: 1px solid var(--line); font-size: .9rem; }
+    .fact span:first-child { color: var(--muted); }
+    .fact strong { text-align: right; color: var(--ink); font-weight: 600; }
+    .education { background: #eef1ef; }
+    .education-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+    .edu-card { position: relative; padding: 30px; background: white; border: 1px solid var(--line); border-radius: var(--radius); min-height: 225px; transition: transform .25s, box-shadow .25s; }
+    .edu-card:hover, .project-card:hover, .achievement:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+    .edu-card.primary { border-top: 4px solid var(--teal-dark); }
+    .edu-card .period { color: var(--teal-dark); font-size: .75rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+    .edu-card h3 { margin: 16px 0 8px; font-size: 1.45rem; }
+    .edu-card p { margin: 0; }
+    .edu-card .degree { color: var(--ink); font-weight: 600; margin-bottom: 7px; }
+    .school-card { grid-column: 1 / -1; min-height: auto; display: grid; grid-template-columns: 1fr 1fr; gap: 30px; align-items: center; }
+    .school-results { display: flex; gap: 14px; }
+    .result { flex: 1; background: var(--paper); border: 1px solid var(--line); border-radius: 14px; padding: 16px; }
+    .result strong { display: block; color: var(--ink); font-family: "Manrope", sans-serif; font-size: 1.55rem; }
+    .result span { color: var(--muted); font-size: .78rem; }
+    .projects-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: stretch; }
+    .project-card { background: white; border: 1px solid var(--line); border-radius: 22px; overflow: hidden; transition: .25s ease; display: flex; flex-direction: column; }
+    .project-top { min-height: 185px; padding: 27px 29px; color: white; background: var(--navy-2); position: relative; overflow: hidden; }
+    .project-top::after { content: ""; position: absolute; width: 210px; height: 210px; border: 1px solid rgba(131,201,189,.3); border-radius: 50%; right: -40px; top: 30px; box-shadow: 0 0 0 25px rgba(131,201,189,.04), 0 0 0 50px rgba(131,201,189,.035); }
+    .project-number { color: var(--teal); font-size: .75rem; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; }
+    .project-top h3 { position: relative; z-index: 1; max-width: 390px; margin: 15px 0 6px; font-size: 1.65rem; }
+    .project-top p { position: relative; z-index: 1; color: #bdcbd2; font-size: .85rem; margin: 0; }
+    .project-body { padding: 27px 29px 30px; display: flex; flex-direction: column; flex: 1; }
+    .project-body > p { font-size: .93rem; }
+    .project-body h4 { font-size: .83rem; letter-spacing: 0; margin: 17px 0 9px; }
+    .project-body ul { margin: 0; padding-left: 18px; color: var(--ink-soft); font-size: .87rem; }
+    .project-body li { margin: 5px 0; }
+    .project-foot { margin-top: auto; padding-top: 20px; }
+    .tag-list { display: flex; flex-wrap: wrap; gap: 7px; }
+    .tag { padding: 6px 10px; font-size: .73rem; }
+    .learning { margin-top: 18px; padding: 14px 16px; border-radius: 13px; background: var(--pale-teal); color: #285d57; font-size: .84rem; }
+    .learning strong { color: #1e504a; }
+    .project-link {
+      display: inline-flex; align-items: center; gap: 7px; margin-top: 17px;
+      color: var(--teal-dark); font-size: .86rem; font-weight: 700;
+      text-decoration: none; border-bottom: 1px solid rgba(40,127,118,.35);
+      padding-bottom: 3px; transition: color .2s, border-color .2s;
+    }
+    .project-link:hover { color: var(--navy); border-color: var(--navy); }
+    .achievements { background: #eef1ef; }
+    .achievement-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .achievement { padding: 23px; background: white; border: 1px solid var(--line); border-radius: 17px; transition: .25s ease; }
+    .achievement .a-icon { width: 36px; height: 36px; display: grid; place-items: center; background: var(--pale-teal); color: var(--teal-dark); border-radius: 11px; margin-bottom: 17px; font-weight: 800; }
+    .achievement h3 { font-size: 1.02rem; margin: 0 0 8px; letter-spacing: -.02em; }
+    .achievement p { font-size: .84rem; margin: 0; }
+    .skills-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .skill-group { padding: 27px; background: white; border: 1px solid var(--line); border-radius: 18px; }
+    .skill-group h3 { margin: 0 0 17px; font-size: 1.12rem; }
+    .skill-group p { font-size: .83rem; margin: 18px 0 0; color: var(--muted); }
+    .interest-panel { margin-top: 18px; padding: 27px; background: var(--navy); color: white; border-radius: 18px; }
+    .interest-panel h3 { margin: 0 0 17px; color: white; font-size: 1.12rem; }
+    .interest-panel .tag { color: #d8e6e6; border-color: rgba(255,255,255,.17); background: rgba(255,255,255,.06); }
+    .contact { background: var(--navy); color: white; }
+    .contact .eyebrow { color: var(--teal); }
+    .contact h2 { max-width: 650px; color: white; }
+    .contact .section-head p { color: #b8c5cf; }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .contact-card { padding: 25px; border: 1px solid rgba(255,255,255,.14); border-radius: 17px; background: rgba(255,255,255,.05); }
+    .contact-card span { display: block; color: #91a2ae; font-size: .75rem; text-transform: uppercase; letter-spacing: .12em; font-weight: 700; margin-bottom: 8px; }
+    .contact-card a { color: white; font-size: 1.03rem; font-weight: 600; text-decoration: none; overflow-wrap: anywhere; }
+    .contact-card a:hover { color: var(--teal); }
+    .contact-bottom { margin-top: 30px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .contact-bottom p { color: #9eafba; margin: 0; font-size: .88rem; }
+    footer { background: #0b1520; color: #93a3af; padding: 25px 0; font-size: .82rem; }
+    .footer-inner { display: flex; justify-content: space-between; align-items: center; gap: 20px; }
+    .footer-links { display: flex; gap: 18px; }
+    .footer-links a { color: #c8d3d8; text-decoration: none; }
+    .footer-links a:hover { color: var(--teal); }
+    #scrollToTop {
+      position: fixed; right: 22px; bottom: 22px; z-index: 40; width: 46px; height: 46px;
+      border: 0; border-radius: 50%; color: var(--navy); background: var(--teal);
+      font-size: 1.2rem; font-weight: 800; cursor: pointer; box-shadow: 0 8px 25px rgba(16,29,43,.2);
+      opacity: 0; visibility: hidden; transform: translateY(8px); transition: .2s ease;
+    }
+    #scrollToTop.show { opacity: 1; visibility: visible; transform: translateY(0); }
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity .65s ease, transform .65s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+    @media (max-width: 900px) {
+      .nav-links { gap: 16px; }
+      .nav-links a { font-size: .82rem; }
+      .hero-grid { gap: 30px; grid-template-columns: 1.2fr .8fr; }
+      .about-grid { gap: 35px; }
+      .achievement-grid { grid-template-columns: repeat(2, 1fr); }
+      .project-body, .project-top { padding-left: 23px; padding-right: 23px; }
+    }
+    @media (max-width: 740px) {
+      .container { width: min(100% - 36px, var(--max)); }
+      .navbar { height: 68px; }
+      .menu-toggle { display: block; }
+      .nav-links {
+        display: none; position: absolute; top: 67px; left: 0; right: 0; padding: 16px 22px 22px;
+        background: rgba(246,247,245,.98); border-bottom: 1px solid var(--line); box-shadow: var(--shadow);
+        flex-direction: column; align-items: stretch; gap: 0;
+      }
+      .nav-links.open { display: flex; }
+      .nav-links li a { display: block; padding: 12px 5px; font-size: .95rem; }
+      .nav-links .nav-cta { display: inline-block; margin-top: 8px; text-align: center; padding: 11px 16px; }
+      .hero { min-height: auto; padding: 130px 0 75px; }
+      .hero-grid { grid-template-columns: 1fr; }
+      .hero-aside { justify-self: start; width: 100%; max-width: 440px; }
+      .hero h1 { font-size: clamp(3.2rem, 14vw, 5.3rem); }
+      .hero::before { right: -430px; }
+      .hero::after { right: -300px; }
+      .strip-inner { align-items: flex-start; flex-direction: column; }
+      .section { padding: 76px 0; }
+      .about-grid, .projects-grid, .skills-layout, .contact-grid { grid-template-columns: 1fr; }
+      .education-grid { grid-template-columns: 1fr; }
+      .school-card { grid-column: auto; grid-template-columns: 1fr; }
+      .school-results { max-width: 450px; }
+      .project-top { min-height: 165px; }
+      .contact-bottom, .footer-inner { align-items: flex-start; flex-direction: column; }
+    }
+    @media (max-width: 480px) {
+      .container { width: calc(100% - 30px); }
+      .hero-actions { display: grid; grid-template-columns: 1fr 1fr; }
+      .hero-actions .btn:first-child, .hero-actions .btn:nth-child(3) { grid-column: 1 / -1; }
+      .btn { padding: 0 13px; font-size: .84rem; }
+      .orbit-card { padding: 22px; }
+      .about-panel, .edu-card, .project-body { padding: 22px; }
+      .achievement-grid { grid-template-columns: 1fr; }
+      .school-results { gap: 8px; }
+      .result { padding: 12px; }
+      .result strong { font-size: 1.3rem; }
+      .fact { flex-direction: column; gap: 4px; }
+      .fact strong { text-align: left; }
+      .footer-links { flex-wrap: wrap; }
+    }
+  </style>
+</head>
+<body>
+  <header class="navbar" id="navbar">
+    <nav class="container nav-inner" aria-label="Main navigation">
+      <a class="brand" href="#home" aria-label="Parv Gupta home">PG<span>.</span></a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="navLinks">☰</button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#achievements">Achievements</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a class="nav-cta" href="#contact">Get in touch ↗</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div class="hero-copy-wrap">
+          <span class="eyebrow">Student · Business · Technology</span>
+          <h1>Parv <span>Gupta.</span></h1>
+          <p class="hero-title">Exploring the intersection of business, finance &amp; technology.</p>
+          <p class="hero-copy">I’m pursuing undergraduate studies at TAPMI and IIM Bangalore, with an interest in how data, analytical thinking and emerging technologies can help solve real-world business problems.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#projects">Explore projects <span aria-hidden="true">↘</span></a>
+            <a class="btn btn-outline" href="#about">About me</a>
+            <a class="btn btn-outline" href="https://www.linkedin.com/in/parv-gupta-914515433/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+            <a class="btn btn-outline" href="#contact">Contact</a>
+          </div>
+        </div>
+        <aside class="hero-aside" aria-label="Areas of interest">
+          <div class="orbit-card">
+            <span class="mini-label">Where my curiosity sits</span>
+            <h3>Business questions.<br>Analytical approaches.</h3>
+            <div class="focus-row"><span class="focus-icon">↗</span> Finance &amp; investment analysis</div>
+            <div class="focus-row"><span class="focus-icon">⌘</span> Data &amp; quantitative thinking</div>
+            <div class="focus-row"><span class="focus-icon">✳</span> AI, ML &amp; emerging technology</div>
+            <div class="focus-row"><span class="focus-icon">◫</span> Business strategy &amp; operations</div>
+          </div>
+          <p class="hero-note">Learning through coursework, projects and practical exploration.</p>
+        </aside>
+      </div>
+    </section>
+
+    <div class="intro-strip">
+      <div class="container strip-inner">
+        <p>Currently pursuing two undergraduate programmes</p>
+        <div class="strip-tags"><span>TAPMI · BBA</span><span>IIM Bangalore · BBA DBE</span><span>Bengaluru, India</span></div>
+      </div>
     </div>
 
-    <div class="projects-grid">
-
-      <!-- PROJECT 01 -->
-      <article class="project-card reveal">
-        <div class="project-top">
-          <span class="project-number">Project 01 · TAPMI</span>
-          <h3>Portfolio Risk Optimisation</h3>
-          <p>Business Mathematics · Quantitative finance</p>
+    <section class="section" id="about">
+      <div class="container">
+        <div class="about-grid">
+          <div class="about-copy reveal">
+            <span class="eyebrow">A little about me</span>
+            <h2>Curious about how ideas become useful solutions.</h2>
+            <p>I’m a BBA student at TAPMI, Bengaluru (MAHE), and I’m also pursuing the BBA in Digital Business and Entrepreneurship programme at IIM Bangalore.</p>
+            <p>My interests span business and management, finance, investment analysis, artificial intelligence and data analytics. I enjoy exploring how quantitative methods and technology can make complex business questions easier to understand and approach.</p>
+            <p>Through academic projects, I’ve had the opportunity to apply concepts from business mathematics to portfolio risk analysis, and to study how digital systems shape everyday food-service operations.</p>
+            <div class="about-note">I’m building my understanding one project, concept and practical question at a time.</div>
+          </div>
+          <aside class="about-panel reveal">
+            <h3>Profile at a glance</h3>
+            <div class="fact"><span>Academic focus</span><strong>Business &amp; digital business</strong></div>
+            <div class="fact"><span>Areas of interest</span><strong>Finance, analytics, AI/ML</strong></div>
+            <div class="fact"><span>Based in</span><strong>Bengaluru, India</strong></div>
+            <div class="fact"><span>Email</span><strong><a href="mailto:parvgupta0407@gmail.com">parvgupta0407@gmail.com</a></strong></div>
+            <div class="fact"><span>Professional profile</span><strong><a href="https://www.linkedin.com/in/parv-gupta-914515433/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a></strong></div>
+          </aside>
         </div>
-        <div class="project-body">
-          <p>Developed an Indian equity portfolio risk analysis and optimisation solution using historical stock returns and computational methods. The project explored how covariance matrices and matrix algebra can help measure and minimise portfolio risk.</p>
+      </div>
+    </section>
 
-          <h4>Methods &amp; implementation</h4>
-          <ul>
-            <li>Worked with historical prices and monthly returns for Indian listed equities.</li>
-            <li>Calculated covariance matrices and portfolio variance using <strong>WᵀΣW</strong>.</li>
-            <li>Compared an equal-weight benchmark with a minimum-variance portfolio.</li>
-            <li>Developed Python-based analysis and an interactive Streamlit application.</li>
-          </ul>
-
-          <div class="project-foot">
-            <div class="tag-list">
-              <span class="tag">Python</span>
-              <span class="tag">Pandas</span>
-              <span class="tag">NumPy</span>
-              <span class="tag">SciPy</span>
-              <span class="tag">Streamlit</span>
-              <span class="tag">Plotly</span>
-              <span class="tag">Excel</span>
+    <section class="section education" id="education">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Academic journey</span>
+          <h2>Education</h2>
+          <p>My current undergraduate programmes, followed by my school education.</p>
+        </div>
+        <div class="education-grid">
+          <article class="edu-card primary reveal">
+            <span class="period">June 2026 – Present</span>
+            <h3>TAPMI, Bengaluru</h3>
+            <p class="degree">Bachelor of Business Administration (BBA)</p>
+            <p>Manipal Academy of Higher Education (MAHE)</p>
+          </article>
+          <article class="edu-card primary reveal">
+            <span class="period">September 2025 – Present</span>
+            <h3>Indian Institute of Management Bangalore</h3>
+            <p class="degree">Bachelor of Business Administration</p>
+            <p>Digital Business and Entrepreneurship (BBA DBE)</p>
+          </article>
+          <article class="edu-card school-card reveal">
+            <div>
+              <span class="period">School education</span>
+              <h3>Summer Fields School, Delhi</h3>
+              <p>Central Board of Secondary Education (CBSE)</p>
             </div>
-            <div class="learning"><strong>Key application:</strong> Translating business mathematics into a practical framework for understanding investment risk and portfolio trade-offs.</div>
+            <div class="school-results">
+              <div class="result"><strong>86.6%</strong><span>Class 12 · 2025</span></div>
+              <div class="result"><strong>89.9%</strong><span>Class 10 · 2023</span></div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="projects">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Learning by doing</span>
+          <h2>Selected academic projects</h2>
+          <p>Projects that connect classroom concepts with practical business, financial and technology applications.</p>
+        </div>
+        <div class="projects-grid">
+          <article class="project-card reveal">
+            <div class="project-top">
+              <span class="project-number">Project 01 · TAPMI</span>
+              <h3>Portfolio Risk Optimisation</h3>
+              <p>Business Mathematics · Quantitative finance</p>
+            </div>
+            <div class="project-body">
+              <p>Developed an Indian equity portfolio risk analysis and optimisation solution using historical stock returns and computational methods. The project explored how covariance matrices and matrix algebra can help measure and minimise portfolio risk.</p>
+              <h4>Methods &amp; implementation</h4>
+              <ul>
+                <li>Worked with historical prices and monthly returns for Indian listed equities.</li>
+                <li>Calculated covariance matrices and portfolio variance using <strong>WᵀΣW</strong>.</li>
+                <li>Compared an equal-weight benchmark with a minimum-variance portfolio.</li>
+                <li>Developed Python-based analysis and an interactive Streamlit application.</li>
+              </ul>
+              <div class="project-foot">
+                <div class="tag-list">
+                  <span class="tag">Python</span><span class="tag">Pandas</span><span class="tag">NumPy</span><span class="tag">SciPy</span><span class="tag">Streamlit</span><span class="tag">Plotly</span><span class="tag">Excel</span>
+                </div>
+                <div class="learning"><strong>Key application:</strong> Translating business mathematics into a practical framework for understanding investment risk and portfolio trade-offs.</div>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card reveal">
+            <div class="project-top">
+              <span class="project-number">Project 02 · TAPMI</span>
+              <h3>AI and Food</h3>
+              <p>Anthropology / DIR · Technology in food services</p>
+            </div>
+            <div class="project-body">
+              <p>An interdisciplinary study of how digital technologies shape food-service operations and customer experiences. The project used two case studies to observe technology in everyday institutional and restaurant settings.</p>
+              <h4>Case studies</h4>
+              <ul>
+                <li><strong>Blue Dove Mess, MAHE Bengaluru:</strong> studied biometric identification for student recognition and meal-subscription access management.</li>
+                <li><strong>Nasi and Mee, Galleria Mall, Bengaluru:</strong> examined the use of accounting software and digital customer loyalty/reward systems in restaurant operations and engagement.</li>
+              </ul>
+              <div class="project-foot">
+                <div class="tag-list">
+                  <span class="tag">Anthropology</span><span class="tag">AI &amp; digital technology</span><span class="tag">Food-service operations</span><span class="tag">Customer experience</span><span class="tag">Case study</span>
+                </div>
+                <div class="learning"><strong>Key application:</strong> Documenting how digital systems can support access management, operational processes and customer engagement.</div>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card reveal">
+            <div class="project-top">
+              <span class="project-number">Project 03 · AI &amp; Actuarial Workflows</span>
+              <h3>Vortex ActuaryOS</h3>
+              <p>AI-powered actuarial workflow prototype</p>
+            </div>
+            <div class="project-body">
+              <p>An AI-powered actuarial workflow prototype exploring how AI agents can help reduce repetitive manual work in actuarial processes. The concept focuses on supporting actuarial teams across data preparation, validation, analysis and reporting while keeping the actuary in control of interpretation and final decisions.</p>
+              <h4>Project focus</h4>
+              <ul>
+                <li>Explored the application of AI agents to actuarial workflows.</li>
+                <li>Designed a workflow-oriented approach to handling repetitive tasks.</li>
+                <li>Examined how AI can support data preparation, validation, analysis and reporting.</li>
+              </ul>
+              <div class="project-foot">
+                <div class="tag-list">
+                  <span class="tag">Artificial Intelligence</span><span class="tag">Actuarial Science</span><span class="tag">Workflow Design</span><span class="tag">Product Thinking</span><span class="tag">Prototyping</span>
+                </div>
+                <div class="learning"><strong>Key application:</strong> Exploring how intelligent automation can support actuarial professionals without replacing human judgement.</div>
+                <a class="project-link" href="https://lnkd.in/g7-TyBcv" target="_blank" rel="noopener noreferrer">Try the Vortex ActuaryOS prototype ↗</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card reveal">
+            <div class="project-top">
+              <span class="project-number">Project 04 · TAPMI</span>
+              <h3>KiranaConnect AI</h3>
+              <p>TLM · AI and digital enablement for kirana retailers</p>
+            </div>
+            <div class="project-body">
+              <p>A project exploring how artificial intelligence can support small kirana businesses. Developed around the context of a local shop owner, the project examines how technology can be communicated in an accessible and practical way to traditional retailers.</p>
+              <h4>Project focus</h4>
+              <ul>
+                <li>Explored the relevance of AI and digital technology in small retail businesses.</li>
+                <li>Used a kirana store owner persona to understand the target audience.</li>
+                <li>Developed a documentary-based approach and marketing communication around the target audience.</li>
+                
+              </ul>
+              <div class="project-foot">
+                <div class="tag-list">
+                  <span class="tag">AI &amp; Technology</span><span class="tag">Retail</span><span class="tag">Digital Enablement</span><span class="tag">Marketing Communication</span><span class="tag">TLM</span>
+                </div>
+                <div class="learning"><strong>Key application:</strong> Understanding how emerging technology can be presented in a relatable and accessible way to traditional businesses.</div>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card reveal">
+            <div class="project-top">
+              <span class="project-number">Project 05 · TAPMI</span>
+              <h3>Polycab India – Complete Accounting Cycle</h3>
+              <p>Financial accounting · Annual report analysis</p>
+            </div>
+            <div class="project-body">
+              <p>A practical accounting project based on Polycab India Limited’s audited FY 2024–25 standalone financial statements. The project involved analysing the annual report, establishing opening balances, recording transactions and completing the accounting cycle through financial statement preparation. FY 2025–26 transactions and closing statements are simulated, not actual Polycab financial results.</p>
+              <h4>Accounting work</h4>
+              <ul>
+                <li>Analysed the company’s audited Balance Sheet and relevant annual report notes.</li>
+                <li>Established opening balances and prepared journal entries, ledger accounts and trial balances.</li>
+                <li>Worked on year-end adjustments, including depreciation, provisions and expected credit losses.</li>
+                <li>Prepared the Trading Account, Profit &amp; Loss Account and Balance Sheet.</li>
+              </ul>
+              <div class="project-foot">
+                <div class="tag-list">
+                  <span class="tag">Financial Accounting</span><span class="tag">Annual Report Analysis</span><span class="tag">Journal Entries</span><span class="tag">Ledgers</span><span class="tag">Trial Balance</span><span class="tag">Financial Statements</span>
+                </div>
+                <div class="learning"><strong>Key application:</strong> Translating published financial statement information into a structured accounting model and completing the accounting cycle.</div>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card reveal">
+            <div class="project-top">
+              <span class="project-number">Project 06 · Power BI</span>
+              <h3>ChaiNest Cafés – Sales Analytics Dashboard</h3>
+              <p>Business intelligence · Data visualisation</p>
+            </div>
+            <div class="project-body">
+              <p>A Power BI project analysing the 2025 sales performance of a fictional café chain operating across 10 Indian cities. The project involved cleaning and transforming sales data, combining datasets, analysing product and customer behaviour, and evaluating store performance against annual targets.</p>
+              <h4>Analysis &amp; dashboard</h4>
+              <ul>
+                <li>Cleaned and transformed sales data using Power Query; appended monthly sales datasets and merged store and product information.</li>
+                <li>Created calculated columns to support business analysis.</li>
+                <li>Analysed revenue trends, product performance, customer behaviour and order patterns.</li>
+                <li>Built three report pages: Sales Overview, Products &amp; Customers, and Store Targets.</li>
+                <li>Compared actual store revenue against annual targets.</li>
+                <li>Project dataset: 600 sales rows, 10 stores, ₹4,73,725 revenue and 600 orders; 5 of 10 stores met their targets, with overall revenue at 98% of target.</li>
+              </ul>
+              <div class="project-foot">
+                <div class="tag-list">
+                  <span class="tag">Power BI</span><span class="tag">Power Query</span><span class="tag">Excel</span><span class="tag">Data Cleaning</span><span class="tag">Data Transformation</span><span class="tag">Data Visualisation</span><span class="tag">Business Intelligence</span>
+                </div>
+                <div class="learning"><strong>Key application:</strong> Turning raw sales data into interactive dashboards that help evaluate business performance and support decision-making.</div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section achievements" id="achievements">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Beyond the classroom</span>
+          <h2>Achievements &amp; activities</h2>
+          <p>A selection of academic recognition, student involvement, competitions and community activities from my school years.</p>
+        </div>
+        <div class="achievement-grid">
+          <article class="achievement reveal"><div class="a-icon">✦</div><h3>Scholar Badge Holder</h3><p>Academic recognition for seven consecutive years, 2017–18 to 2023–24.</p></article>
+          <article class="achievement reveal"><div class="a-icon">◎</div><h3>Student Council</h3><p>Involved in the Student Council from 2019–2024; served as House Captain in 2022–23.</p></article>
+          <article class="achievement reveal"><div class="a-icon">1</div><h3>Compfest 2024</h3><p>Secured first position at the inter-school competition organised by Frank Anthony Public School.</p></article>
+          <article class="achievement reveal"><div class="a-icon">2</div><h3>Computer Day 2022</h3><p>Second position in a PowerPoint presentation competition.</p></article>
+          <article class="achievement reveal"><div class="a-icon">⌁</div><h3>Science &amp; technology events</h3><p>Selected for IIT Delhi SciTech Spin 2024; participated in DPS RK Puram Science Fest 2024 with a Pythagorean siphon project.</p></article>
+          <article class="achievement reveal"><div class="a-icon">◌</div><h3>Youth Eco Summit 2024</h3><p>Selected for the summit by BAJAJ Foundation.</p></article>
+          <article class="achievement reveal"><div class="a-icon">▤</div><h3>Event coordination</h3><p>Participated in organising Music Bonanza and other student activities.</p></article>
+          <article class="achievement reveal"><div class="a-icon">♡</div><h3>Community initiative</h3><p>Participated in a book donation initiative for Hope Hall Foundation.</p></article>
+          <article class="achievement reveal"><div class="a-icon">◈</div><h3>Model United Nations</h3><p>Participated in an intra-school MUN as Namibia’s delegate in the UNHRC.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="skills">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Tools &amp; interests</span>
+          <h2>Skills I’m building</h2>
+          <p>A developing toolkit across business, finance and technology. These categories reflect areas of study and practical exposure, not claims of expert-level proficiency.</p>
+        </div>
+        <div class="skills-layout">
+          <article class="skill-group reveal">
+            <h3>Business &amp; finance</h3>
+            <div class="tag-list">
+              <span class="tag">Financial analysis</span><span class="tag">Investment &amp; portfolio analysis</span><span class="tag">Business mathematics</span><span class="tag">Risk analysis</span><span class="tag">Management concepts</span>
+            </div>
+            <p>Concepts explored through coursework and academic projects.</p>
+          </article>
+          <article class="skill-group reveal">
+            <h3>Technology &amp; analytics</h3>
+            <div class="tag-list">
+              <span class="tag">Python</span><span class="tag">Excel</span><span class="tag">Power BI</span><span class="tag">Data analysis</span><span class="tag">AI/ML concepts</span><span class="tag">SQL fundamentals</span>
+            </div>
+            <p>Tools and foundations I’m learning and applying in project contexts.</p>
+          </article>
+        </div>
+        <div class="interest-panel reveal">
+          <h3>Areas I’m interested in exploring</h3>
+          <div class="tag-list">
+            <span class="tag">Quantitative finance</span><span class="tag">Investment banking</span><span class="tag">Artificial intelligence &amp; machine learning</span><span class="tag">Business analytics</span><span class="tag">Financial technology</span><span class="tag">Emerging technologies</span>
           </div>
         </div>
-      </article>
+      </div>
+    </section>
 
-      <!-- PROJECT 02 -->
-      <article class="project-card reveal">
-        <div class="project-top">
-          <span class="project-number">Project 02 · TAPMI</span>
-          <h3>AI and Food</h3>
-          <p>Anthropology / DIR · Technology in food services</p>
+    <section class="section contact" id="contact">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Say hello</span>
+          <h2>Interested in connecting or exchanging ideas?</h2>
+          <p>For academic conversations, project collaborations or professional networking, feel free to reach out.</p>
         </div>
-        <div class="project-body">
-          <p>An interdisciplinary study of how digital technologies shape food-service operations and customer experiences. The project used two case studies to observe technology in everyday institutional and restaurant settings.</p>
-
-          <h4>Case studies</h4>
-          <ul>
-            <li><strong>Blue Dove Mess, MAHE Bengaluru:</strong> Studied biometric identification for student recognition and meal-subscription access management.</li>
-            <li><strong>Nasi and Mee, Galleria Mall, Bengaluru:</strong> Examined accounting software and digital customer loyalty and reward systems in restaurant operations.</li>
-          </ul>
-
-          <div class="project-foot">
-            <div class="tag-list">
-              <span class="tag">Anthropology</span>
-              <span class="tag">AI &amp; digital technology</span>
-              <span class="tag">Food-service operations</span>
-              <span class="tag">Customer experience</span>
-              <span class="tag">Case study</span>
-            </div>
-            <div class="learning"><strong>Key application:</strong> Documenting how digital systems can support access management, operational processes and customer engagement.</div>
-          </div>
+        <div class="contact-grid reveal">
+          <div class="contact-card"><span>Email</span><a href="mailto:parvgupta0407@gmail.com">parvgupta0407@gmail.com ↗</a></div>
+          <div class="contact-card"><span>LinkedIn</span><a href="https://www.linkedin.com/in/parv-gupta-914515433/" target="_blank" rel="noopener noreferrer">linkedin.com/in/parv-gupta-914515433 ↗</a></div>
         </div>
-      </article>
-
-      <!-- PROJECT 03 -->
-      <article class="project-card reveal">
-        <div class="project-top">
-          <span class="project-number">Project 03 · AI &amp; Actuarial Workflows</span>
-          <h3>Vortex ActuaryOS</h3>
-          <p>AI-powered actuarial workflow prototype</p>
+        <div class="contact-bottom">
+          <p>Based in Bengaluru, India · Open to thoughtful conversations.</p>
+          <a class="btn btn-primary" href="mailto:parvgupta0407@gmail.com">Send an email ↗</a>
         </div>
-        <div class="project-body">
-          <p>An AI-powered actuarial workflow prototype exploring how AI agents can help reduce repetitive manual work in actuarial processes. The concept focuses on supporting actuarial teams across data preparation, validation, analysis and reporting while keeping the actuary in control of interpretation and final decisions.</p>
+      </div>
+    </section>
+  </main>
 
-          <h4>Project focus</h4>
-          <ul>
-            <li>Explored the application of AI agents to actuarial workflows.</li>
-            <li>Designed a workflow-oriented approach to handling repetitive tasks.</li>
-            <li>Examined how AI can support data preparation, validation and analysis.</li>
-            <li>Explored the role of AI-assisted insight generation and reporting.</li>
-          </ul>
-
-          <div class="project-foot">
-            <div class="tag-list">
-              <span class="tag">Artificial Intelligence</span>
-              <span class="tag">AI Agents</span>
-              <span class="tag">Actuarial Science</span>
-              <span class="tag">Workflow Automation</span>
-              <span class="tag">FinTech</span>
-            </div>
-            <div class="learning"><strong>Key application:</strong> Exploring how intelligent automation can support actuarial professionals without replacing human judgement.</div>
-            <p style="margin-top:16px;">
-              <a class="btn btn-light" href="https://lnkd.in/g7-TyBcv" target="_blank" rel="noopener noreferrer">View project ↗</a>
-            </p>
-          </div>
-        </div>
-      </article>
-
-      <!-- PROJECT 04 -->
-      <article class="project-card reveal">
-        <div class="project-top">
-          <span class="project-number">Project 04 · TAPMI</span>
-          <h3>KiranaConnect AI</h3>
-          <p>Technology &amp; Literacy Management · AI for local retail</p>
-        </div>
-        <div class="project-body">
-          <p>A project exploring how artificial intelligence can support small kirana businesses. Developed around the context of a local shop owner, the project examines how technology can be communicated in an accessible and practical way to traditional retailers.</p>
-
-          <h4>Project focus</h4>
-          <ul>
-            <li>Explored the relevance of AI and digital technology in small retail businesses.</li>
-            <li>Used a kirana store owner persona to understand the target audience.</li>
-            <li>Developed a documentary-based approach to communicating the project.</li>
-            <li>Explored marketing communication through a campaign designed around the target audience.</li>
-          </ul>
-
-          <div class="project-foot">
-            <div class="tag-list">
-              <span class="tag">Artificial Intelligence</span>
-              <span class="tag">Digital Business</span>
-              <span class="tag">Retail Technology</span>
-              <span class="tag">Marketing Strategy</span>
-              <span class="tag">Customer Persona</span>
-              <span class="tag">Documentary</span>
-            </div>
-            <div class="learning"><strong>Key application:</strong> Understanding how emerging technology can be presented in a relatable and accessible way to traditional businesses.</div>
-          </div>
-        </div>
-      </article>
-
-      <!-- PROJECT 05 -->
-      <article class="project-card reveal">
-        <div class="project-top">
-          <span class="project-number">Project 05 · Accounting</span>
-          <h3>Polycab India – Complete Accounting Cycle</h3>
-          <p>Financial accounting · Annual report analysis</p>
-        </div>
-        <div class="project-body">
-          <p>A practical accounting project based on Polycab India Limited's audited FY 2024–25 standalone financial statements. The project involved analysing the annual report, establishing opening balances, recording transactions and completing the accounting cycle through financial statement preparation.</p>
-
-          <h4>Accounting work</h4>
-          <ul>
-            <li>Analysed the company's audited Balance Sheet and relevant annual report notes.</li>
-            <li>Established opening balances and prepared journal entries.</li>
-            <li>Recorded transactions and prepared ledger accounts and trial balances.</li>
-            <li>Worked on year-end adjustments, including depreciation, provisions and expected credit losses.</li>
-            <li>Prepared the Trading Account, Profit &amp; Loss Account and Balance Sheet.</li>
-          </ul>
-
-          <div class="project-foot">
-            <div class="tag-list">
-              <span class="tag">Financial Accounting</span>
-              <span class="tag">Journal Entries</span>
-              <span class="tag">Ledger Accounts</span>
-              <span class="tag">Trial Balance</span>
-              <span class="tag">Annual Report Analysis</span>
-              <span class="tag">Financial Statements</span>
-            </div>
-            <div class="learning"><strong>Key application:</strong> Applying accounting principles to a real company's published financial information and a structured accounting-cycle exercise.</div>
-          </div>
-        </div>
-      </article>
-
-      <!-- PROJECT 06 -->
-      <article class="project-card reveal">
-        <div class="project-top">
-          <span class="project-number">Project 06 · Power BI</span>
-          <h3>ChaiNest Cafés – Sales Analytics Dashboard</h3>
-          <p>Business intelligence · Data visualisation</p>
-        </div>
-        <div class="project-body">
-          <p>A Power BI project analysing the 2025 sales performance of a fictional café chain operating across 10 Indian cities. The project involved cleaning and transforming sales data, combining datasets, analysing product and customer behaviour, and evaluating store performance against annual targets.</p>
-
-          <h4>Dashboard &amp; analysis</h4>
-          <ul>
-            <li>Cleaned and transformed sales data using Power Query.</li>
-            <li>Appended monthly sales datasets and merged store and product information.</li>
-            <li>Created calculated columns to support business analysis.</li>
-            <li>Analysed revenue trends, product performance, customer behaviour and order patterns.</li>
-            <li>Built three report pages: Sales Overview, Products &amp; Customers, and Store Targets.</li>
-            <li>Compared actual store revenue against annual targets.</li>
-          </ul>
-
-          <div class="project-foot">
-            <div class="tag-list">
-              <span class="tag">Power BI</span>
-              <span class="tag">Power Query</span>
-              <span class="tag">Data Cleaning</span>
-              <span class="tag">Data Transformation</span>
-              <span class="tag">Data Visualisation</span>
-              <span class="tag">Business Intelligence</span>
-            </div>
-            <div class="learning"><strong>Key application:</strong> Turning raw sales data into interactive dashboards that help evaluate business performance and support decision-making.</div>
-          </div>
-        </div>
-      </article>
-
+  <footer>
+    <div class="container footer-inner">
+      <span>© <span id="year">2026</span> Parv Gupta. Designed with clarity and curiosity.</span>
+      <div class="footer-links">
+        <a href="#home">Back to top ↑</a>
+        <a href="https://www.linkedin.com/in/parv-gupta-914515433/" target="_blank" rel="noopener noreferrer" aria-label="Visit Parv Gupta on LinkedIn">LinkedIn ↗</a>
+        <a href="mailto:parvgupta0407@gmail.com">Email ↗</a>
+      </div>
     </div>
-  </div>
-</section>
+  </footer>
+
+  <button id="scrollToTop" aria-label="Scroll to top" title="Back to top">↑</button>
+
+  <script>
+    (() => {
+      const navbar = document.getElementById("navbar");
+      const scrollButton = document.getElementById("scrollToTop");
+      const menuToggle = document.getElementById("menuToggle");
+      const navLinks = document.getElementById("navLinks");
+
+      const updateScrollUI = () => {
+        const scrolled = window.scrollY > 24;
+        navbar.classList.toggle("scrolled", scrolled);
+        scrollButton.classList.toggle("show", window.scrollY > 320);
+      };
+      window.addEventListener("scroll", updateScrollUI, { passive: true });
+      updateScrollUI();
+
+      menuToggle.addEventListener("click", () => {
+        const isOpen = navLinks.classList.toggle("open");
+        menuToggle.setAttribute("aria-expanded", String(isOpen));
+        menuToggle.setAttribute("aria-label", isOpen ? "Close navigation menu" : "Open navigation menu");
+        menuToggle.textContent = isOpen ? "×" : "☰";
+      });
+
+      navLinks.querySelectorAll("a").forEach(link => {
+        link.addEventListener("click", () => {
+          navLinks.classList.remove("open");
+          menuToggle.setAttribute("aria-expanded", "false");
+          menuToggle.setAttribute("aria-label", "Open navigation menu");
+          menuToggle.textContent = "☰";
+        });
+      });
+
+      scrollButton.addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+      });
+
+      document.getElementById("year").textContent = new Date().getFullYear();
+
+      if ("IntersectionObserver" in window && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        const observer = new IntersectionObserver(entries => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.12 });
+        document.querySelectorAll(".reveal").forEach(element => observer.observe(element));
+      } else {
+        document.querySelectorAll(".reveal").forEach(element => element.classList.add("visible"));
+      }
+    })();
+  </script>
+</body>
+</html>
